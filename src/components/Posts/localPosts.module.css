@@ -15,7 +15,6 @@
     justify-content: space-between;
 }
 
-
 .postsContainer .detailsPost {
     display: flex;
     align-items: center;
@@ -35,4 +34,36 @@
 
 .postsContainer img {
     width: 100%;
+}
+
+.postsContainer .containerActionLinks {
+    padding: 0.3rem 0rem;
+    display: flex;
+}
+
+.postsContainer .actionLinkVote {
+    display: flex;
+    align-items: center;
+}
+
+.postsContainer .actionLinkVote img {
+    width: 25px;
+}
+
+.postsContainer .actionLinkVote > p {
+    padding: 0.8rem;
+}
+
+.postsContainer .actionComment {
+    display: flex;
+    align-items: center;
+    margin-left: 1.5rem;
+}
+
+.postsContainer .actionComment > p {
+    margin-left: 0.5rem;
+}
+
+.postsContainer .actionComment {
+    display: flex;
 }
