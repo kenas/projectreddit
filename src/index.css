@@ -1,0 +1,35 @@
+
+@import url('https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+* {
+  margin: 0rem;
+  padding: 0rem;
+  box-sizing: border-box;
+  font-family: "PT Serif", serif;
+  color: var(--fontColor);
+}
+
+:root {
+  --accentColor: hsl(16, 100%, 50%);
+  --secondAccentColor: hsl(206, 100%, 41%);
+  --backgroundColor: hsl(0, 0%, 12%);
+  --fontColor: hsl(204, 4%, 52%);
+  --componentsColor: hsl(0, 0%, 18%);
+}
+
+body {
+  background-color: var(--backgroundColor);
+  /* display: grid;
+  place-items: center; 
+  height: 100vh;      
+  margin: 0; */
+}
+
+main {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-areas: 
+  "news news news"
+  "post post aside";
+  grid-template-rows: auto 1fr;
+}

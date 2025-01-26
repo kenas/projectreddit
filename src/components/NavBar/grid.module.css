@@ -1,0 +1,36 @@
+nav {
+    display: grid;
+    grid-template-areas: 
+    "logo input links";
+    justify-items: center;
+    align-items: center;
+    -webkit-box-shadow: 0px 3px 2px 0px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 0px 3px 2px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 3px 2px 0px rgba(0, 0, 0, 0.25);
+    width: 100%;
+}
+
+nav .logo {
+    grid-area: logo;
+}
+
+nav > input {
+    grid-area: input;
+    background-color: var(--componentsColor);
+    border: none;
+    outline: none;
+    width: 600px;
+    padding: 0.6rem;
+    border-radius: 13px;
+}
+
+nav > ul {
+    grid-area: links;
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+nav > ul > li {
+    padding: 0.7rem;
+}

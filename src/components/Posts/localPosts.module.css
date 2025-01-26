@@ -1,0 +1,38 @@
+.postsContainer {
+    grid-area: post;
+    width: 65%;
+    /* border: 2px solid pink; */
+    place-self: end;
+}
+
+.postsContainer > h2 {
+    color: var(--accentColor);
+}
+
+.postsContainer .containerDetails {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.postsContainer .detailsPost {
+    display: flex;
+    align-items: center;
+    padding: 0.4rem 0rem;
+}
+
+.postsContainer .detailsPost > p {
+    padding-left: 1rem;
+}
+
+.postsContainer .detailsPost img {
+    width: 40px;
+    height: auto;
+    border-radius: 50%;  
+    object-fit: cover; 
+}
+
+.postsContainer img {
+    width: 100%;
+}
