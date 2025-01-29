@@ -1,69 +1,7 @@
 .postsContainer {
-    grid-area: post;
-    width: 65%;
-    /* border: 2px solid pink; */
-    place-self: end;
-}
-
-.postsContainer > h2 {
-    color: var(--accentColor);
-}
-
-.postsContainer .containerDetails {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.postsContainer .detailsPost {
-    display: flex;
-    align-items: center;
-    padding: 0.4rem 0rem;
-}
-
-.postsContainer .detailsPost > p {
-    padding-left: 1rem;
-}
-
-.postsContainer .detailsPost img {
-    width: 40px;
-    height: auto;
-    border-radius: 50%;  
-    object-fit: cover; 
-}
-
-.postsContainer img {
-    width: 100%;
-}
-
-.postsContainer .containerActionLinks {
-    padding: 0.3rem 0rem;
-    display: flex;
-}
-
-.postsContainer .actionLinkVote {
-    display: flex;
-    align-items: center;
-}
-
-.postsContainer .actionLinkVote img {
-    width: 25px;
-}
-
-.postsContainer .actionLinkVote > p {
-    padding: 0.8rem;
-}
-
-.postsContainer .actionComment {
-    display: flex;
-    align-items: center;
-    margin-left: 1.5rem;
-}
-
-.postsContainer .actionComment > p {
-    margin-left: 0.5rem;
-}
-
-.postsContainer .actionComment {
-    display: flex;
+  grid-column: 2/3;
+  grid-row: 2/3;
+    /* width: 100%; */
+    justify-self: end;
+  /* margin: auto 50px; */
 }

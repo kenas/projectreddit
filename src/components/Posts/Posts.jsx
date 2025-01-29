@@ -1,51 +1,56 @@
-import localPosts from './localPosts.module.css';
+const postsData = [
+    {
+      id: 1,
+      title: "The traditional Chinese soup for tonight",
+      author: "Hana Wagner",
+      timeAgo: "2 hours ago",
+      image: "../../assets/soupe.jpg", // Add the path of the image
+      content: "To make a delicious soup, you will need carrots, celery, onions, garlic, vegetable broth, tomatoes, and fresh herbs.",
+      votes: 34,
+      comments: 28,
+    },
+    {
+      id: 2,
+      title: "Exploring the Show of Scenic Landscapes",
+      author: "Thomas Makalu",
+      timeAgo: "6 hours ago",
+      image: "../../assets/show-ladscape.jpg", // Add the path of the image
+      content: "Landscapes have long been a source of inspiration for artists, photographers, and travelers alike...",
+      votes: 189,
+      comments: 12,
+    },
+    {
+        id: 3,
+        title: "Scenic Landscapes",
+        author: "Cobra",
+        timeAgo: "46 hours ago",
+        image: "../../assets/show-ladscape.jpg", // Add the path of the image
+        content: "and travelers alike...",
+        votes: 189,
+        comments: 12,
+      }
+  ];
 
-import imgSoupe from '../../assets/soupe.jpg'
-import profile1 from '../../assets/profile1.png'
-import profile2 from '../../assets/profile2.png'
-import share from '../../assets/share.svg'
-import comment from '../../assets/comment.svg'
-import arrowUp  from '../../assets/arrow-up.svg'
-import arrowDown  from '../../assets/arrow-down.svg'
+
+import Post from './Post/Post';
+import localPostsStyles from './localPosts.module.css';
 
 const Posts = () => {
     return (
-        <>
-        <div className={localPosts.postsContainer}>
-            <h2>The traditional Chines soupe for today night</h2>
-                <div className={localPosts.containerDetails}>
+        <div className={localPostsStyles.postsContainer}>
+        {postsData.map((post) => {
+            return (
+                
+                <Post 
+                    post={post}
+                    key={post.id}
+                />
+              
 
-                    <div className={localPosts.detailsPost}>
-                        <img src={profile1} alt="Profile picture of user"/>
-                        <p>Hana Wagner</p>
-                    </div>
+            )
+        })}
         
-                    <p>2hours</p>
-                </div>
-
-
-            <img src={imgSoupe} alt="Traditional soupe from Chine" />
-            <p>To make a delicious soup, you will need carrots, celery, onions, garlic, vegetable broth, tomatoes, and fresh herbs.</p>
-
-            <div className={localPosts.containerActionLinks}>
-                <div className={localPosts.actionLinkVote}>
-                    <img src={arrowUp} alt="Vote for the Article" />
-                        <p>34</p>
-                    <img src={arrowDown} alt="Vote for the Article" />
-                </div>
-
-                <div className={localPosts.actionComment}>
-                    <img src={comment} alt="How many comments" />
-                    <p>28</p>
-                </div>
-
-                <div className={localPosts.actionComment}>
-                    <img src={share} alt="You can share the article" />
-                    <p>Share</p>
-                </div>
-            </div>
         </div>
-        </>
     )
 }
 
