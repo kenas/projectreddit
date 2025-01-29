@@ -1,3 +1,15 @@
-.subContainer {
-    grid-area: aside;
+.subreddits {
+    grid-column: 3/4;
+    grid-row: 2/3;
+    justify-self: start;
+    width: 100%;
+}
+
+.subreddits h4 {
+    text-transform: uppercase;
+    color: var(--accentColor);
+}
+
+.subreddits ul {
+    list-style: none;
 }
