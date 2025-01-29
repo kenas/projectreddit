@@ -1,0 +1,15 @@
+header {
+    display: grid;
+    grid-template-columns:  1fr;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 20rem 50rem 20rem 20rem;
+    gap: 1.50rem;
+}
+
+main, header {
+    justify-content: center;   
+    justify-items: center;
+}
