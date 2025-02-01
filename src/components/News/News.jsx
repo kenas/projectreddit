@@ -17,22 +17,46 @@ const localNewsData = [
     }
   ];
 
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+
+import {fetchPopular} from '../../store/slices/NewsSlice';
+import New from './New/New';
 import localNews from './localNews.module.css';
-import img from '../../assets/snake.png';
 
 const News = () => {
+
+  const cutTitle = (title) => {
+    
+   return title.length >= 30 ? title.slice(0, 30)+ '...' : title;
+    
+  }
+
+    const dispatch = useDispatch();
+
+    const redditNews = useSelector((state) => state.news.news); // Use selector to get posts from the store
+    const status = useSelector((state) => state.news.status);
+    const errors = useSelector((state) => state.news.errors);
+    
+    useEffect(() => {
+
+
+      if(status === 'idle') {
+       
+        dispatch(fetchPopular());
+  
+      }
+   
+    }, [dispatch], status)
+
     return (
         <div className={localNews.cardContainer}>
-          {localNewsData.map((n, index) =>
-            <div key={index} className={localNews.card}>
-                      <div className={localNews.gradient}></div>
-                      <img src={img} alt="" />
-              <div className={localNews.details}>
-      
-                <div className={localNews.title}>{n.title}</div>
-                <p>{n.content}</p>
-              </div>
-            </div>
+          {redditNews.map((news, id) =>
+            <New 
+              key={news.id}
+              news={news}
+              cutTitle={cutTitle}
+            />
           )}
         </div>
     )
