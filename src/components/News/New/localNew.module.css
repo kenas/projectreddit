@@ -1,0 +1,63 @@
+.card {
+ 
+    background-color: var(--componentsColor);
+
+    display: block;
+    /* padding: 0.7rem 0.9rem; */
+    border-radius: 1.083rem;
+    margin: 1rem;
+    width: 15rem;
+    height: 17rem;
+    position: relative;
+    display: flex;
+    align-items: end;
+    z-index: 1;
+}
+
+.card  > .gradient {
+    border-radius: 1.083rem;
+    position: absolute;
+    background: rgb(0,0,0);
+    background: -moz-linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(255,255,255,1) 78%);
+    background: -webkit-linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(255,255,255,1) 78%);
+    background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(255, 255, 255, 0.088) 44%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000",endColorstr="#ffffff",GradientType=1); 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+   
+}
+
+.card  > img {
+ object-fit: cover;
+ z-index: -1;
+ width: 100%;
+ height: 17rem;
+ border-radius:1.083rem;;
+ -webkit-border-radius: 1.083rem;;
+ -moz-border-radius: 1.083rem;;
+ -ms-border-radius: 1.083rem;;
+ -o-border-radius: 1.083rem;;
+} 
+
+.card > .details {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    padding: 1rem
+}
+
+.card > .details > h2 {
+    font-size: 1.3rem;
+    color: white;
+}
+
+.card > .details > a {
+    color: white;
+    font-size: 0.75rem;
+}
+
+.card > .details > a:hover {
+    text-decoration: underline;
+}
