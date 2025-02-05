@@ -1,68 +1,96 @@
-import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { getAccessToken } from '../../api/getAccessToken';
+
+const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 export const fetchPosts = createAsyncThunk(
     'posts/fetchPosts',
-    async () => {
+    async (_, { rejectWithValue }) => {
+        const token = await getAccessToken();
+        if (!token) {
+            return rejectWithValue('No token received');
+        }
 
         try {
-            const response = await fetch('https://www.reddit.com/r/all/hot.json');
+            const response = await fetch('https://api.reddit.com/?limit=13');
 
-            if(!response.ok) {
+            if (!response.ok) {
                 throw new Error('Failed to fetch posts');
             }
 
-           return  await response.json();
-            // console.log(data)
-        } catch(error) {
-            console.log('Error', + error)
+            const data = await response.json();
+
+            let posts = data.data.children.map((post) => ({
+                id: post.data.id,
+                title: post.data.title,
+                author: post.data.author,
+                avatar: '',
+                categories: post.data.content_categories,
+                created: post.data.created,
+                subreddit: post.data.subreddit_name_prefixed,
+                images: post.data.preview,
+                media: post.data.secure_media,
+                content: post.data.selftext,
+                url: post.data.url,
+                num_comments: post.data.num_comments
+            }));
+
+            let avatarRequests = posts.map(async (post, index) => {
+          
+                    try {
+                        
+                        const response = await fetch(`https://api.reddit.com/user/${post.author}/about.json`);
+        
+                            if(!response.ok) {
+                                throw new Error("I cound not fetch the users!");
+                            }
+        
+                            const avatars = await response.json();
+                            
+                            post.avatar = avatars.data.icon_img ? avatars.data.icon_img.split('?')[0] : 'https://www.redditstatic.com/avatars/defaults/v2/avatar_default_2.png';
+                        
+                    } catch (error) {
+                        console.error(`Failed to fetch avatar for ${post.author}`, error);
+                    }
+                    return post; 
+            });
+            posts = await Promise.all(avatarRequests);
+            console.log(posts)
+            return posts;
+
+   
+        } catch (error) {
+            return rejectWithValue({ message: error.message });
         }
     }
-)
-
-export const fetchAuthorForProfilePic = createAsyncThunk(
-    'user/fetchAuthorForProfilePic',
-    async (username) => {
-        try {
-            const response = await fetch(`https://www.reddit.com/r/${username}/about.json`);
-
-            if(!response.ok) {
-                throw new Error("I cound not fetch the User data!");
-            }
-
-            return await response.json();
-            
-        } catch(error) {
-            console.log('Error', + error)
-        }
-    }
-)
+);
 
 const postsReducer = createSlice({
     name: 'posts',
     initialState: {
         posts: [],
         status: 'idle',
-        errors: {}
+        errors: [],
     },
     reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(fetchPosts.pending, (state) => {
-            state.status = 'loading';
-        })
-        .addCase(fetchPosts.fulfilled, (state, action) => {
-        
-            state.status = 'succeeded';
-            //Remeber, you can get alredy right data structure format before loop in the component
-            state.posts = action.payload.data.children.map((post) => post.data);
-        })
-        .addCase(fetchPosts.rejected, (state, action) => {
-            // console.log(action.error.message);
-            state.status = 'rejected';
-            state.errors = action.error.message;
-        })
-    }
-
-})
-
+        builder
+            .addCase(fetchPosts.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(fetchPosts.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                // Check if the data and children exist
+               
+                    state.posts = action.payload;
+    
+            })
+            .addCase(fetchPosts.rejected, (state, action) => {
+                state.status = 'rejected';
+                // Provide a more robust error message
+                state.errors = action.payload?.message || 'An unknown error occurred';
+            });
+    },
+});
 
 export default postsReducer.reducer;

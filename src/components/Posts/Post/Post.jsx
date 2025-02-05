@@ -1,7 +1,6 @@
 import comment from '../../../assets/comment.svg'
 import arrowUp  from '../../../assets/arrow-up.svg'
 import arrowDown  from '../../../assets/arrow-down.svg'
-import showLadscape from '../../../assets/show-ladscape.jpg';
 import share from '../../../assets/share.svg'
 
 
@@ -9,11 +8,34 @@ import localPostsStyle from './localPost.module.css';
 
 const Post = ({post}) => {
 
-    const getImage = (data) => {
-    //    console.log(typeof(data))
-       console.log(data[0])
-        return  data?.images[0]?.resolutions[0]?.url;
-    }
+    const getImage = (images) => {
+        if (images && images.images) {
+            return images.images.map((img, index) => (
+                <img key={index} src={img.source.url.replace("&amp;", "&")} alt="" width="400" />
+            ));
+        } else if (post.secure_media && post.secure_media.reddit_video) {
+            return (
+                <video controls width="400">
+                    <source src={post.secure_media.reddit_video.fallback_url} type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
+            );
+        }
+        return null;
+    };
+    
+    // const getImage = (preview) => {
+        
+    //     if (!preview || !preview.images) return null; // Check if preview exists
+
+    //     return preview.images.map((img, index) => (
+    //         <img key={index} src={img.source.url} alt="Preview" width="400" />
+    //     ));
+   
+        
+      
+    //    // return post ? <img src={post.pre} alt="The picture of the article."/> : '';
+    // }
 
     return (
         <>
@@ -23,16 +45,14 @@ const Post = ({post}) => {
                 <div className={localPostsStyle.containerDetails}>
 
                     <div className={localPostsStyle.detailsPost}>
-                        <img src='https://i.redd.it/snoovatar/avatars/fc1176a4-403b-4299-8661-fa27b97aa853.png' alt="Profile picture of user"/>
-                        <p><a href={`https://www.reddit.com/user/${post.author}/`}>{post.author}</a> | <a href={`https://www.reddit.com/${post.subreddit_name_prefixed}/`}>{post.subreddit_name_prefixed}</a></p>
+                        <img src={post.avatar ? post.avatar : null} />
+                        <p><a href={`https://www.reddit.com/user/${post.author}/`}>{post.author}</a> | <a href={`https://www.reddit.com/${post.subreddit}/`}>{post.subreddit}</a></p>
                     </div>
         
                     <p>{post.timeAgo}</p>
                 </div>
 
-            {/* <img src={post.preview.images.url} alt="Traditional soupe from Chine" /> */}
-            <img src={post.url} alt="Alt text, Post preview" />    
-
+                {getImage(post.images)}
           
             <p className={localPostsStyle.content}>{post.selftext}</p>
 
@@ -45,7 +65,7 @@ const Post = ({post}) => {
 
                 <div className={localPostsStyle.actionComment}>
                     <img src={comment} alt="How many comments" />
-                    <p>28</p>
+                    <p>{post.num_comments}</p>
                 </div>
 
                 <div className={localPostsStyle.actionComment}>

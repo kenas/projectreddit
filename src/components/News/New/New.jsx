@@ -10,6 +10,7 @@ const New = ({news, cutTitle, id}) => {
                     <img src={news.url? news.url : ''} alt="" />
                 <div className={localNewsStyle.details}>
                     <h2 className={localNewsStyle.title}>{cutTitle(news.title)}</h2>
+                    <p>{news.avatar}</p>
                     <a href=''>{news.subreddit_name_prefixed}</a>
                 </div>
             </div>

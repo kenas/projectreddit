@@ -17,11 +17,18 @@ const localNewsData = [
     }
   ];
 
+//General
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
+//Slices
 import {fetchPopular} from '../../store/slices/NewsSlice';
+// import {fetchUserData} from '../../store/slices/UserAvatersSlice';
+
+//Components
 import New from './New/New';
+
+//CSS
 import localNews from './localNews.module.css';
 
 const News = () => {
@@ -44,7 +51,6 @@ const News = () => {
       if(status === 'idle') {
        
         dispatch(fetchPopular());
-  
       }
    
     }, [dispatch], status)

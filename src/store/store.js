@@ -2,12 +2,14 @@ import { configureStore } from "@reduxjs/toolkit";
 
 //import Slices
 import postsReducer from './slices/PostsSlice.js';
-import NewsReducer from './slices/NewsSlice.js';
+import newsReducer from './slices/NewsSlice.js';
+// import avaterReducer from './slices/UserAvatersSlice.js';
 
 const store = configureStore({
     reducer: {
         posts: postsReducer,
-        news: NewsReducer
+        news: newsReducer,
+        // avaterUsers: avaterReducer
 
     }
 })
