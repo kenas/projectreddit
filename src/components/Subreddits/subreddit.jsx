@@ -1,12 +1,10 @@
+import { Link } from "react-router-dom";
 
 const Subreddit = ({sub}) => {
     return (
 
-            <li 
-                key={sub}
-                           
-            >   
-                <img src={sub.icon} alt="" /><a href="">{sub.name}</a>
+            <li>   
+                <img src={sub.icon} alt="" /><Link to='/subreddits/:subreddit'>{sub.name}</Link>
             </li>
     )
 }

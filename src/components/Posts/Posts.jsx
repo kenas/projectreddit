@@ -22,19 +22,17 @@ const Posts = () => {
     return (
    
         <div className={localPostsStyles.postsContainer}>
-        {status === 'rejected' ? errros : 
+            {status === 'rejected' ? errros : 
 
-        posts.map((post) => {
-         
-            return (
-            
-                <Post 
-                    post={post}
-                    key={post.id}
-                />
-            )
-        })
-        }
+                posts.map((post) => {
+                
+                    return (
+
+                        <Post post={post} key={post.id}/>
+
+                    )
+                })
+            }
         </div>
     )
 }

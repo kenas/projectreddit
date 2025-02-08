@@ -1,34 +1,18 @@
-import NavBar from '../src/components/NavBar/NavBar';
-import News from '../src/components/News/News';
-import Posts from '../src/components/Posts/Posts';
-import Aside from '../src/components/Subreddits/Subreddits';
-
-
-import {RouterProvider, Route, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
-
-import './App.css'
-
+import { RouterProvider, createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom';
+import Root from './root/Root';
+import Subreddit from './pages/Subreddit';
+import './App.css';
 
 function App() {
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route path="/" element={<Root />}>
+        <Route path="subreddits/:subreddit" element={<Subreddit/>} />
+      </Route>
+    )
+  );
 
-  const router = createBrowserRouter(createRoutesFromElements([
-
-  ]));
-
-  return (
-    <>
-      <NavBar />
-      <header>  
-        <News/>
-      </header>
-      <main>
-        <Posts />
-        <Aside />
-      </main>
-      < <RouterProvider router={router}/>
-
-    </>
-  )
+  return <RouterProvider router={router} />;
 }
 
-export default App
+export default App;
