@@ -6,7 +6,7 @@ header {
 main {
     display: grid;
     grid-template-columns: 20rem 50rem 20rem 20rem;
-    gap: 1.50rem;
+    gap: 6rem;
 }
 
 main, header {

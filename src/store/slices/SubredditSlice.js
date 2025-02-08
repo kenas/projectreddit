@@ -15,10 +15,8 @@ export const fetchSubreddits  = createAsyncThunk(
             const subreddit = data.data.children.map((sub) => ({
                 id: sub.data.id,
                 name: sub.data.display_name_prefixed,
-                icon: sub.data.icon_img
+                icon: sub.data.icon_img === "" ? 'https://www.redditstatic.com/avatars/defaults/v2/avatar_default_2.png' : sub.data.icon_img,
             }))
-
-            // console.log(subreddit);
 
             return subreddit;
 

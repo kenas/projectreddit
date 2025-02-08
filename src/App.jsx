@@ -3,10 +3,17 @@ import News from '../src/components/News/News';
 import Posts from '../src/components/Posts/Posts';
 import Aside from '../src/components/Subreddits/Subreddits';
 
+
+import {RouterProvider, Route, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
+
 import './App.css'
 
 
 function App() {
+
+  const router = createBrowserRouter(createRoutesFromElements([
+
+  ]));
 
   return (
     <>
@@ -18,6 +25,7 @@ function App() {
         <Posts />
         <Aside />
       </main>
+      < <RouterProvider router={router}/>
 
     </>
   )

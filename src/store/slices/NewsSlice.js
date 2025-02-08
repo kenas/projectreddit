@@ -1,15 +1,10 @@
 import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
-import { getAccessToken } from '../../api/getAccessToken';
 
 //Fetching popular posts
 export const fetchPopular = createAsyncThunk(
     'popular/fetchPopular',
     async (_, {rejectWithValue}) => {
-                const token = await getAccessToken();
-                if (!token) {
-                    return rejectWithValue('No token received');
-                }
-
+       
         try {
             const response = await fetch('https://api.reddit.com/r/popular.json');
             
@@ -45,7 +40,7 @@ const newsResucer = createSlice({
             state.news = action.payload.data.children.slice(0, 4).map((post) => post.data);
         })
         .addCase(fetchPopular.rejected, (state, action) => {
-            state.status = 'failed';
+            state.status = 'rejected';
             state.errors.push(action.payload?.message || 'Unknown error');
         })
     }
