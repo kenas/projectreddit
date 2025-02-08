@@ -8,13 +8,10 @@ import { useEffect } from 'react';
 
 const Posts = () => {
 
-
     const dispatch = useDispatch(); 
 
-    const posts = useSelector((state) => state.posts.posts); // Use selector to get posts from the store
-    const status = useSelector((state) => state.posts.status);
-    const errors = useSelector((state) => state.posts.errors);
-  
+    const {posts, errros, status } = useSelector((state) => state.posts); // Use selector to get posts from the store
+
 
     useEffect(() => {
       if (status === 'idle') {
@@ -23,9 +20,11 @@ const Posts = () => {
     }, [dispatch, status]); 
 
     return (
+   
         <div className={localPostsStyles.postsContainer}>
-      
-        {posts.map((post) => {
+        {status === 'rejected' ? errros : 
+
+        posts.map((post) => {
          
             return (
             
@@ -34,8 +33,8 @@ const Posts = () => {
                     key={post.id}
                 />
             )
-        })}
-        
+        })
+        }
         </div>
     )
 }

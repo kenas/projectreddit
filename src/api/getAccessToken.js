@@ -36,7 +36,7 @@ export const getAccessToken = async () => {
     }
 
     const data = await response.json();
-    console.log('Access Token Data:', data);
+    // console.log('Access Token Data:', data);
     return data.access_token;  // Return the access token from the response
 
   } catch (error) {

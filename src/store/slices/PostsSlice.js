@@ -1,15 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getAccessToken } from '../../api/getAccessToken';
 
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 export const fetchPosts = createAsyncThunk(
     'posts/fetchPosts',
     async (_, { rejectWithValue }) => {
-        const token = await getAccessToken();
-        if (!token) {
-            return rejectWithValue('No token received');
-        }
 
         try {
             const response = await fetch('https://api.reddit.com/?limit=13');
@@ -80,15 +75,12 @@ const postsReducer = createSlice({
             })
             .addCase(fetchPosts.fulfilled, (state, action) => {
                 state.status = 'succeeded';
-                // Check if the data and children exist
-               
-                    state.posts = action.payload;
-    
+                state.posts = action.payload;
             })
             .addCase(fetchPosts.rejected, (state, action) => {
                 state.status = 'rejected';
                 // Provide a more robust error message
-                state.errors = action.payload?.message || 'An unknown error occurred';
+                state.errors.push(action.payload?.message || 'An unknown error occurred');
             });
     },
 });

@@ -2,6 +2,7 @@ import comment from '../../../assets/comment.svg'
 import arrowUp  from '../../../assets/arrow-up.svg'
 import arrowDown  from '../../../assets/arrow-down.svg'
 import share from '../../../assets/share.svg'
+import moment from 'moment';
 
 
 import localPostsStyle from './localPost.module.css';
@@ -45,11 +46,16 @@ const Post = ({post}) => {
                 <div className={localPostsStyle.containerDetails}>
 
                     <div className={localPostsStyle.detailsPost}>
-                        <img src={post.avatar ? post.avatar : null} />
-                        <p><a href={`https://www.reddit.com/user/${post.author}/`}>{post.author}</a> | <a href={`https://www.reddit.com/${post.subreddit}/`}>{post.subreddit}</a></p>
+                        <div className={localPostsStyle.information}>
+                            <img src={post.avatar ? post.avatar : null} />
+                            <p><a href={`https://www.reddit.com/user/${post.author}/`}>{post.author}</a> | <a href={`https://www.reddit.com/${post.subreddit}/`}>{post.subreddit}</a></p>
+
+                        </div>
+                        <div className={localPostsStyle.timeAgo}>
+                            <p>{moment.unix(post.created).fromNow()}</p>
+                        </div>
+
                     </div>
-        
-                    <p>{post.timeAgo}</p>
                 </div>
 
                 {getImage(post.images)}
