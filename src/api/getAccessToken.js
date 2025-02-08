@@ -5,8 +5,8 @@ export const getAccessToken = async () => {
   // const clientID = process.env.REACT_APP_REDDIT_USER_ID;  
   // const clientSecret = process.env.REACT_APP_REDDIT_SECRET_ID;  
 
-  const clientID = 'dV4UXTcxq6q1dPQOCTYdvA';  
-  const clientSecret = '7AEf8gpQnLaf_rg46iJ3mUAijnc85A';
+  const clientID = '';  
+  const clientSecret = '';
 
   // Ensure both clientID and clientSecret are available
   if (!clientID || !clientSecret) {
